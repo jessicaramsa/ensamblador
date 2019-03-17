@@ -1,0 +1,478 @@
+**************** OPERACIONES ARITMETICAS **************
+------------------ Suma (add) -------------------------
+debug
+a
+mov al,3
+mov bl,5
+add al,bl
+mov dh,4
+mov ch,3
+add dh,ch
+add bl,dh
+add al,[200]
+add [200],a
+add 3,4
+add [200],[201]
+add 4,al
+-------------------- Resta (sub) ----------------------
+debug
+a
+mov al,3
+mov bl,5
+sub al,bl
+mov dh,4
+mov ch,3
+sub dh,ch
+sub bl,dh
+sub al,[200]
+sub [200],a
+sub 3,4
+sub [200],[201]
+sub 4,al
+-------------------- Suma con acarreo (adc) -----------
+debug
+a
+stc		;encender bandera de carry
+mov al,3
+adc al,2
+adc al,bl
+------------------- Resta con acarreo (sbb) -----------
+debug
+a
+stc
+mov al,6
+sbb al,2
+------------------ Incrementar (inc) ------------------
+inc cl
+------------------ Decrementar (dec) ------------------
+debug
+a
+dec al
+dec dh
+dec ah
+dec ax
+
+
+***************** OPERACIONES LOGICAS *****************
+------------------- AND (and) -------------------------
+debug
+a
+mov al,ae
+mov bl 7b
+and al,bl
+and al,0f
+---------------- OR (suma logica) ---------------------
+debug
+a
+mov al,ae
+mov bl,7b
+or al,bl
+or dx,96
+or bh,al
+----------------------- XOR ---------------------------
+debug
+a
+mov al,ae
+mov bl,7b
+xor al,bl
+xor dx,96
+xor bh,al
+---------------- NOT ----------------------------------
+; se necesitan dos operandos
+not cx
+not ah
+------------- complemento a 2 (neg) -------------------
+neg cx
+
+
+*******************************************************
+Ejercicio  -> 9 - 6
+Restar sin utilizar sub, neg, sbb
+Solo se usará una vez la suma (add)
+-------------------------------------------------------
+debug
+a
+mov al,8
+mov bl,2
+not bl ;primer complemento
+inc bl ;segundo complemento
+add al,bl
+
+
+**************** MNEMONICOS HEGEMONICOS ***************
+--------------------- CORRIMIENTOS --------------------
+shr al,;corrimiento hacia la derecha,cuantas veces
+;mas de dos veces solamente con el contador
+
+
+debug
+a
+mov al,b6
+shr al,1 ; corrimiento a la derecha
+mov cl,2
+shr al,cl ; corrimiento a la izquierda
+shl al,1
+shl al,cl
+ror al,1 ; rotacion a la derecha
+ror al,cl
+rol al,1 ; rotacion a la izquierda
+rol al,cl
+stc
+rcr al,cl ; rotacion con carry a la derecha
+stc
+rcl al,1 ; rotacion con carry a la izquierda
+
+----------------- Comparar (cmp) ----------------------
+;internamente efectua una resta
+;necesito dos operandos
+
+debug
+a
+mov al,6
+mov cl,3
+dec al
+cmp al,cl 	; comparar
+jne 104 	; salta si no eres igual, jnz
+je 100		; salta si eres igual, jz
+
+
+
+******************** INTERRUPCIONES *******************
+mov ah,02
+mov dl,35
+int 21		; interrupcion
+;p - proceda a ejecutar la interrupcion
+
+*******************************************************
+imprimir nombre
+-------------------------------------------------------
+debug
+eds:200 "Jessica"
+a
+mov cl,7
+mov si,200 	; direccionamiento directo
+mov ah,02
+mov dl,[si] 	; direccionamiento indirecto
+int 21
+inc si
+dec cl
+cmp cl,0
+jne 107
+int 20 		; fin del programa
+
+
+debug
+eds:200 "Jessica"
+a
+mov cl,c
+mov ah,02
+mov dl,0d	;salto 1
+int 21
+mov dl,0a	;retorno de carro
+int 21
+dec cl
+cmp cl,0
+jne 104		;salto 1
+mov cl,24
+mov dl,20
+int 21		;salto 2
+dec cl
+cmp cl,0
+jne 117		;salto 2
+mov cl,7
+mov si,200 	;direccionamiento directo
+mov ah,02
+mov dl,[si] 	;direccionamiento indirecto, salto 3
+int 21
+inc si
+dec cl
+cmp cl,0
+jne 127		;salto 3
+int 20 		; fin del programa
+n c:\jessica.com
+rcx
+:208		;caracteres a imprimir + 1
+w
+q
+
+; g - corro todo el programa, si tengo fin del programa
+
+
+*******************************************************
+Imprimir el abecedario
+-------------------------------------------------------
+debug
+eds: 200 "abcdefghijklmnopqrstuvwxyz"
+a
+mov cl,1a
+mov si,200
+mov ah,02
+mov dl,[si]	;aqui es salto 1
+int 21		;ejecutar con p
+dec cl
+inc si
+cmp cl,0
+jne 107		;salto 1
+int 20
+
+
+debug
+a
+mov cl,1a
+mov bl,61
+mov ah,02
+mov dl,bl	;aqui es salto 1
+int 21
+mov dl,20
+int 21
+inc bl
+dec cl
+cmp cl,0
+jne 106		;salto 1
+int 20
+
+*******************************************************
+Suma (solo con mnemónicos ya vistos)
+-------------------------------------------------------
+debug
+a
+mov al,3
+mov bl,2
+inc al		;salto 1
+dec bl
+cmp bl,0
+jne 104		;salto 1
+int 20
+
+
+debug
+a
+mov al,33
+mov bl,38
+add al,bl
+aaa        ;ajuste ascii
+mov al,34
+add al,bl
+aaa
+
+
+------------- AAA (Ajuste a ASCII de la Adición) ------
+;El valor para modificarse debe estar en el registro
+;al y regresa el numero en un códido BCD descompactado
+
+
+debug
+eds:200 "242"
+eds:210 "424"
+eds:220 "0000"
+a
+mov si,202
+mov di,212
+mov bx,223
+mov al,[si]
+mov dl,[di]
+and al,0f
+and dl,0f
+add al,dh
+add al,dl
+aaa        ;aplicar el ajuste
+mov [bx],al
+mov dh,ah
+mov ah,0    ;resultado primer operando
+dec si
+dec di
+dec bx
+mov al,[si]
+mov dl,[di]
+and al,0f
+and dl,0f
+add al,dh
+adc al,dl
+aaa
+mov [bx],al
+mov dh,ah
+mov ah,0    ;resultado segundo operando
+dec si
+dec di
+dec bx
+mov al,[si]
+mov dl,[di]
+and al,0f
+and dl,0f
+add al,dh
+adc al,dl
+aaa
+mov [bx],al    ;resultado tercer operando
+dec bx
+mov [bx],ah
+mov cl,4    ;imprimir dato
+mov ah,02    ;funci�n
+mov si,220
+mov dl,[si]    ;salto 1
+or dl,30
+int 21
+inc si
+dec cl
+cmp cl,0
+jne 151        ;salto 1
+int 20
+
+
+-------- primera simplificacion de suma ---------------
+debug
+eds:200 "999"
+eds:210 "999"
+eds:220 "0000"
+a
+mov cl,3
+mov si,202
+mov di,212
+mov bx,223
+mov al,[si]    ;salto 1
+mov dl,[di]
+and al,0f
+and dl,0f
+add al,dh
+add al,dl
+mov ah,0    ;limpiar
+aaa        ;aplicar el ajuste
+mov [bx],al
+mov dh,ah
+dec si
+dec di
+dec bx
+dec cl
+cmp cl,0
+jne 10b        ;salto 1
+mov [bx],ah
+mov cl,4    ;imprimir dato
+mov ah,02    ;funci�n
+mov si,220
+mov dl,[si]    ;salto 2
+or dl,30
+int 21
+inc si
+dec cl
+cmp cl,0
+jne 132        ;salto 2
+int 20
+
+
+----------- segunda simplificacion de suma ------------
+debug
+eds:200 "999"
+eds:210 "999"
+eds:220 "0000"
+a
+mov cl,3
+mov si,202
+mov di,212
+mov bx,223
+mov al,[si]    ;salto 1
+mov dl,[di]
+adc al,dl    ;suma con acarreo
+mov ah,0    ;limpiar
+aaa        ;aplicar el ajuste
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 10b    ;salto 1, dec-cmp-jne
+mov [bx],ah
+mov cl,4    ;imprimir dato
+mov ah,02    ;funci�n
+mov si,220
+mov dl,[si]    ;salto 2
+or dl,30
+int 21
+inc si
+loop 124    ;salto 2
+int 20
+
+
+------------------------ Loop -------------------------
+debug
+a
+mov cl,3
+inc al
+loop 102
+
+
+------- AAS (Ajuste ASCII de la subtracci�n) ----------
+debug
+eds:200 "777"
+eds:210 "999"
+eds:220 "0000"
+a
+mov cl,3
+mov si,202
+mov di,212
+mov bx,223
+mov al,[si]    ;salto 1
+mov dl,[di]
+sbb al,dl    ;resta con acarreo
+mov ah,0    ;limpiar
+aas        ;aplicar el ajuste
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 10b    ;salto 1, dec-cmp-jne
+mov [bx],ah
+mov cl,4    ;imprimir dato
+mov ah,02    ;funci�n
+mov si,220
+mov dl,[si]    ;salto 2
+or dl,30
+int 21
+inc si
+loop 124    ;salto 2
+int 20
+
+
+------------------- Imprimir con signo ----------------
+debug
+a
+mov al,39
+mov bl,37
+sbb al,bl
+aas        ;ajuste para la resta
+mov al,37
+mov bl,39
+sbb al,bl
+aas
+cmp ah,ff
+;enviar mensaje n�mero negativo
+cmp ah,00
+;enviar mensaje n�mero positivo
+    ;mensaje con resultado
+
+
+;prueba imprimir con signo
+debug
+a
+mov al,39
+mov bl,37
+sbb al,bl
+aas         ;ajuste para la resta
+mov al,37
+mov bl,39
+sbb al,bl
+aas
+cmp ah,00
+jne 01      ;negativo, ve a s1
+je 02       ;positivo, ve a s2
+mov ah,2d   ;s1
+mov ah,2b   ;s2
+mov bx,ax
+mov ah,02   ;s3
+mov dl,ax
+or dl,30
+int 21
+loop 03     ;ve a s3
+int 20
+
+
+
+;20 Marzo 2019
+
