@@ -1,4 +1,4 @@
-**************** OPERACIONES ARITMETICAS **************
+﻿**************** OPERACIONES ARITMETICAS **************
 ------------------ Suma (add) -------------------------
 debug
 a
@@ -403,8 +403,57 @@ debug
 eds:200 "777"
 eds:210 "999"
 eds:220 "0000"
+eds:230 "Primer operando:  "
+eds:250 "Segundo operando:  "
+eds:270 "Resultado:  "
 a
+
+mov cl,c
+mov ah,02
+mov dl,0d	;salto 1
+int 21
+mov dl,0a	;retorno de carro
+int 21
+dec cl
+cmp cl,0
+jne 104		;salto 1
+mov cl,24
+mov dl,20
+int 21		;salto 2
+dec cl
+cmp cl,0
+jne 117		;salto 2
+
+mov cl,12	;primer mensaje impreso
+mov si,230
+mov ah,02
+mov dl,[si] 	;s3
+int 21
+inc si
+loop 107 	;ve a s3
+mov cl,3	;primer dato
+mov si,200
+mov dl,[si]	;s4
+int 21
+inc si
+loop 113	;ve a s4
+mov dl,0a	;salto de linea
+int 21
+mov dl,0d	;retorno de carro
+int 21
+mov cl,13	;segundo mensaje impreso
+mov si,250
+mov dl,[si]	;s5
+int 21
+inc si
+loop 127	;ve a s5
 mov cl,3
+mov si,210
+mov dl,[si]	;s6
+int 21
+inc si
+loop 133	;ve a s6
+mov cl,3	;INICIO DE SUMA
 mov si,202
 mov di,212
 mov bx,223
@@ -417,17 +466,37 @@ mov [bx],al
 dec si
 dec di
 dec bx
-loop 10b    ;salto 1, dec-cmp-jne
+loop 145    ;salto 1, dec-cmp-jne
 mov [bx],ah
-mov cl,4    ;imprimir dato
-mov ah,02    ;funci�n
+mov ah,02	;funcion con la interrupcion
+mov dl,0a	;cambio de linea
+int 21
+mov dl,0d	;retorno de carro
+int 21
+mov cl,d	;tercer mensaje/msj resultado
+mov si,270
+mov dl,[si]	;s7
+int 21
+inc si
+loop 166	;ve a salto 7
+mov cl,4    	;imprimir resultado de la suma
+mov ah,02    	;funci�n de la interrupcion
 mov si,220
-mov dl,[si]    ;salto 2
+mov dl,[si]	;s2
 or dl,30
 int 21
 inc si
-loop 124    ;salto 2
+loop 174    	;ve a salto 2
+mov ah,0
+int 16
 int 20
+************************ imprimir en el centro
+---- Guardar programa
+n c:\suma.com
+rcx
+280
+r
+w
 
 
 ------------------- Imprimir con signo ----------------
@@ -474,5 +543,51 @@ int 20
 
 
 
-;20 Marzo 2019
+;19 Marzo 2019
+--- funciòn con interrupciòn que permitir acceso
+--- del teclado
+int 16h
+
+debug
+a
+int 16
+mov ah,0
+int 16
+
+mov ah,02 ;funcion int
+mod dl,dato
+int 21h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
