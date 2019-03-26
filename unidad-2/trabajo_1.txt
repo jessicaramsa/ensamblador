@@ -1,0 +1,91 @@
+/*IMPRIMIR NOMBRE Y CALIFICACION ABAJO IZQUIERDO
+IMPRIMIR	0-6 REPROBADO
+		7-9 APROBADO
+		MAYOR FUERA DE RANGO
+
+CENTRAR EL LETRETO
+*/
+
+/*EJEMPLO:
+(LADO DE ABAJO IZQUIERDO)
+
+CHRIS
+CALIFICACION 8
+
+(EN EL CENTRO) //DECIR SI ES APROBADO O REPROBADO
+*/
+
+debug
+a
+jmp 10b
+
+eds: 102 "Jessica"
+eds: 109 "03"
+a 10b
+mov ah,02
+mov cl,16
+mov dl,0d	;AQUI VA EL SALTO 3
+int 21
+mov dl,0a
+int 21
+loop 10f	;SALTO 3
+mov cl,7	;AQUI EMPIEZA EL CENTRADO DE NOMBRE
+mov ah,02
+mov si,102
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 120	;SALTO 1
+mov dl,0d
+int 21
+mov dl,0a
+int 21
+mov cl,2
+mov ah,02
+mov si,109
+mov dl,[si]	;AQUI VA EL SALTO 2
+int 21
+inc si
+loop 136	;SALTO 2
+mov ah,0
+int 16
+int 20
+
+-------------------------------------------------
+
+debug
+a
+jmp 10b
+
+eds: 102 "Jessica"
+eds: 109 "03"
+eds: 10b "Fuera de Rango"
+a 10b
+mov ah,02
+mov cl,16
+mov dl,0d	;AQUI VA EL SALTO 3
+int 21
+mov dl,0a
+int 21
+loop 10f	;SALTO 3
+mov cl,7	;AQUI EMPIEZA EL CENTRADO DE NOMBRE
+mov ah,02
+mov si,102
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 120	;SALTO 1
+mov dl,0d
+int 21
+mov dl,0a
+int 21
+mov cl,2
+mov ah,02
+mov si,109
+mov dl,[si]	;AQUI VA EL SALTO 2
+int 21
+inc si
+loop 136	;SALTO 2
+mov ah,0
+int 16
+int 20
