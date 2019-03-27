@@ -1,10 +1,8 @@
-------
 ;21 Marzo 2019
-
-*************** Salto incondicional (jmp) ************
+;*************** Salto incondicional (jmp) ************
 ;va a saltar una direccion
 ;no depende de las banderas
--------------
+;------------------------------------------------------
 debug
 a
 jmp 109
