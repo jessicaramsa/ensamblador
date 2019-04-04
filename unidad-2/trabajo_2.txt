@@ -1,0 +1,248 @@
+/*
+Hacer la multiplicacion de dos numeros
+
+Ejemplo:
+
+"Multiplicando- " 6987 	//15 caracteres
+"Multiplicador- " 98	//15 caracteres
+
+Primera Multi: //la multi de 6987*8
+Segunda Multi: //la multi de 6987*9
+
+"Resultado 1º " 55896	//13 caracteres
+"Resultado 2º " 62883	//13 caracteres
+"Resultado Final-- " 984726	//18 caracteres
+*/
+
+debug
+eds:300 "6987"
+eds:310 "98"
+eds:320 "000000"
+eds:330 "000000"
+eds:340 "000000"
+eds:350 "Multiplicando- "
+eds:370 "Multiplicador- "
+eds:390 "Resultado 1: "
+eds:410 "Resultado 2: "
+eds:430 "Resultado Final-- "
+a
+mov cl,f	;PRIMER MENSAJE
+mov si,350	;traemos mensaje 1
+mov ah,02
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 107	;SALTO 1
+mov cl,4
+mov si,300	;traemos el primer dato
+mov dl,[si]	;AQUI VA SALTO 2
+int 21
+inc si
+loop 113	;SALTO 2
+mov dl,0a
+int 21
+mov dl,0d
+int 21
+mov cl,f	;SEGUNDO MENSAJE
+mov si,370
+mov dl,[si]	;AQUI VA SALTO 3
+int 21
+inc si
+loop 127	;SALTO 3
+mov cl,2	;traemos el segundo dato
+mov si,310
+mov dl,[si]	;AQUI VA EL SALTO 4
+int 21
+inc si
+loop 133	;SALTO 4 FIN DE LETREROS
+mov cl,4		;INICIO DE PRIMER MUL
+mov dh,00
+mov si,303	;traemos el primer num multiplicando
+mov di,311	;traemos el primer num multiplicador
+mov bx,325	;lugar a guardar el resultado
+mov al,[si]	;aqui es salto 1
+and al,0f
+mov dl,[di]
+and dl,0f
+mul dl
+aam		;ajuste ASCCII de MUL
+add al,dh	
+aaa 		;ajuste ASCCII de SUM
+mov [bx],al
+mov dh,ah
+dec si
+dec bx
+loop 147	;salto 1
+mov [bx],ah
+mov dl,0a	;EMPEZAMOS A IMPRIMIR EL PRIMER RESULTADO
+mov ah,02	;CAMBIO DE LINEA Y RETORNO DE CARRO
+int 21
+mov dl,0d
+int 21
+mov cl,d	;PRIMER MENSAJE DE RESULTADO
+mov si,390	;traemos mensaje 1
+mov ah,02
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 172	;SALTO 1
+mov cl,5	;TRAEMOS EL PRIMER RESULTADO
+mov si,321
+mov ah,02
+mov dl,[si]	;aqui es salto 2
+or dl,30
+int 21
+inc si
+loop 180	;salto 2 FIN DE PRIMER RESULTADO
+mov cl,4		;INICIO DE SEGUNDA MUL
+mov dh,00
+mov si,303	;traemos el primer num multiplicando
+mov di,310	;traemos el primer num multiplicador
+mov bx,334	;lugar a guardar el resultado
+mov al,[si]	;aqui es salto 1
+and al,0f
+mov dl,[di]
+and dl,0f
+mul dl
+aam		;ajuste ASCCII de MUL
+add al,dh	
+aaa 		;ajuste ASCCII de SUM
+mov [bx],al
+mov dh,ah
+dec si
+dec bx
+loop 197	;salto 1
+mov [bx],ah
+mov dl,0a	;EMPEZAMOS A IMPRIMIR EL SEGUNDO RESULTADO
+mov ah,02	;CAMBIO DE LINEA Y RETORNO DE CARRO
+int 21
+mov dl,0d
+int 21
+mov cl,d	;SEGUNDO MENSAJE DE RESULTADO
+mov si,410	;traemos mensaje 2
+mov ah,02
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 1C2	;SALTO 1
+mov cl,5	;TRAEMOS EL SEGUNDO RESULTADO
+mov si,330
+mov ah,02
+mov dl,[si]	;aqui es salto 2
+or dl,30
+int 21
+inc si
+loop 1D0	;salto 2 FIN DE SEGUNDO RESULTADO
+mov cl,6		;INICIO DE SUMA DE RESULTADOS
+mov si,325
+mov di,335
+mov bx,345
+mov al,[si]	;AQUI VA EL SALTO 1
+mov dl,[di]
+adc al,dl
+mov ah,0 	;Resultado del primer operando
+aaa 		;ajuste de suma
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 1E5		;SALTO 1
+mov [bx],ah
+mov dl,0a
+mov ah,02	;CAMBIO DE LINEA Y RETORNO DE CARRO
+int 21
+mov dl,0d
+int 21
+mov cl,12	;IMPRIMIR TERCER MENSAJE RESULTADO
+mov si,430
+mov dl,[si]		;AQUI VA EL SALTO 7
+int 21
+inc si
+loop 206		;SALTO 7
+mov cl,6 	;Imprimir resultado FINAL
+mov ah,02
+mov si,340
+mov dl,[si]	; AQUI VA EL SALTO 2
+or dl,30
+int 21
+inc si
+loop 214		;SALTO 2
+mov ah,0
+int 20
+
+------------------------------------------------------------------
+
+debug
+eds: 200 "999"
+eds: 210 "999"
+eds: 220 "0000"
+eds: 230 "Primer Operando:  " 
+eds: 250 "Segundo Operando:  " 
+eds: 270 "Resultado:  " 
+a
+mov cl,12	;PRIMER MENSAJE
+mov si,230
+mov ah,02
+mov dl,[si]		;AQUI VA EL SALTO 3
+int 21		;IMPRIME EL DATO
+inc si
+loop 107 		;SALTO 3
+mov cl,3	;IMPRIMIR EL PRIMER DATO
+mov si,200
+mov dl,[si]		;AQUI VA EL SALTO 4
+int 21
+inc si
+loop 113		;SALTO 4
+mov dl,0a
+int 21
+mov dl,0d
+int 21
+mov cl,13	;SEGUNDO MENSAJE
+mov si,250
+mov dl,[si]		;AQUI VA EL SALTO 5
+int 21
+inc si
+loop 127		;SALTO 5
+mov cl,3
+mov si,210
+mov dl,[si]		;AQUI VA EL SALTO 6
+int 21
+inc si
+loop 133		;salto 6
+mov cl,3	;INICIO DE SUMA
+mov si,202
+mov di,212
+mov bx,223
+mov al,[si]	;AQUI VA EL SALTO 1
+mov dl,[di]
+adc al,dl
+mov ah,0 	;Resultado del primer opreando
+aaa 		;ajuste de suma
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 145		;SALTO 1
+mov [bx],ah
+mov dl,0a
+mov ah,02	;CAMBIO DE LINEA Y RETORNO DE CARRO
+int 21
+mov dl,0d
+int 21
+mov cl,c	;IMPRIMIR TERCER MENSAJE RESULTADO
+mov si,270
+mov dl,[si]		;AQUI VA EL SALTO 7
+int 21
+inc si
+loop 166		;SALTO 7
+mov cl,4 	;Imprimir resultado de la suma
+mov ah,02
+mov si,220
+mov dl,[si]	; AQUI VA EL SALTO 2
+or dl,30
+int 21
+inc si
+loop 174		;SALTO 2
+mov ah,0
+int 16
+int 20

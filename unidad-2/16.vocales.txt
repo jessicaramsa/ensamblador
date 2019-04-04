@@ -49,7 +49,7 @@ cmp dl,55		;U
 je 159			;ve a s6
 cmp dl,75
 je 159			;ve a s6
-jmp 17e			;ve a s7, donde NO CAMBIA
+jmp 15d			;ve a s7, donde NO CAMBIA;179
 mov dl,35		;s2, soy A
 jmp 15d			;ve a s11, donde SUMA
 mov dl,34		;s3, soy E
@@ -65,16 +65,14 @@ mov dh,dl		;s11, inicia SUMA
 mov cl,2
 mov bx,353
 mov al,[bx]		;s9
+and al,0f
+and dh,0f
 adc al,dl
-mov ah,0
 aaa
-or al,30
 mov [bx],al
-dec bx
 mov dl,ah
-or dl,30
+dec bx
 loop 164		;ve a s9
-or ah,30
 mov [bx],ah
 mov dl,dh
 ;---------------- CAMBIO DE VALORES ----------------
@@ -88,13 +86,13 @@ mov di,330
 mov dl,[di]		;s10
 int 21
 inc di
-loop 18c		;ve a s10
+loop 16b		;ve a s10;187
 mov cl,4
 mov di,350
 mov dl,[di]		;s12
 int 21
 inc di
-loop 198		;ve a s12
+loop 177		;ve a s12;192
 int 20
 
 
