@@ -1,4 +1,4 @@
-;-------- marzo 26 2019
+﻿;-------- marzo 26 2019
 ;------------------- MULTIPLICACI�N () ---------------
 ;exclusiva del registro acumulador
 ;me regresa el resultado en ah en c�digo bcd descompactado
@@ -81,6 +81,24 @@ int 21
 loop 12e		;ve a s2
 int 20
 
-
 dds:220
 
+
+
+
+;Multiplicando:  6987	;20-14
+;Multiplicador:  98	;12-b
+;Primera mult:  055896	;15-f,6
+;Segunda mult:  062883	;15-f,6
+;Resultado:  0684726	;12-b,7
+
+eds:200 "Multiplicando:  "
+eds:210 "6987"
+eds:220 "Multiplicador:  "
+eds:230 "98"
+eds:240 "Primera mult:  "
+eds:250 "000000"
+eds:260 "Segunda mult:  "
+eds:270 "000000"
+eds:280 "Resultado:  "
+eds:290 "0000000"
