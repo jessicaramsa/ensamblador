@@ -1,0 +1,258 @@
+---Suma----
+debug
+eds:200 "999"
+eds:205 "999"
+eds:210 "0000"
+a
+mov si,202	;Primer operando
+mov di,207	;segudo operando
+mov bx,213	;Reservo de memoria
+mov al,[si]
+mov cl,[di]
+;and al,0f
+;and cl,0f
+add al,cl
+aaa 		;Ajuste ASCII
+mov [bx],al
+dec si
+dec di
+dec bx
+mov al,[si]
+mov cl,[di]
+;and al,0f
+;and cl,0f
+add al,ah
+add al,cl
+mov ah,0
+aaa 
+mov [bx],al
+dec si
+dec di
+dec bx
+mov al,[si]
+mov cl,[di]
+;and al,0f
+;and cl,0f
+add al,ah
+add al,cl
+mov ah,0
+aaa 
+mov [bx],al
+dec bx 
+mov [bx],ah
+mov cl,4	;imprimir resultado
+mov si,210
+mov ah,02
+mov dl,[si]	;Salto 1
+or dl,30
+int 21
+inc si
+dec cl
+cmp cl,0 
+jne 13C		;salto 1
+int 20
+	
+g
+
+----suma con ciclo
+debug
+eds:200 "999"
+eds:205 "999"
+eds:210 "0000"
+a
+mov dl,3
+mov si,202	;Primer operando
+mov di,207	;segudo operando
+mov bx,213	;Reservo de memoria
+mov al,[si]
+mov cl,[di]
+add al,ah
+add al,cl
+mov ah,0
+aaa 		;Ajuste ASCII
+mov [bx],al
+dec si
+dec di
+dec bx
+dec dl
+cmp dl,0
+jne 10B
+mov [bx],al
+mov cl,4	;imprimir resultado
+mov si,210
+mov ah,02
+mov dl,[si]	;Salto 1
+or dl,30
+int 21
+inc si
+dec cl
+cmp cl,0 
+jne 12B		;salto 1
+int 20
+	
+g
+
+
+----suma adc y ajuste aaa
+debug
+eds:200 "543"
+eds:205 "999"
+eds:210 "0000"
+a
+mov cl,3
+mov si,202	;Primer operando
+mov di,207	;segudo operando
+mov bx,213	;Reservo de memoria
+mov al,[si]	;salto 2
+mov dl,[di]
+adc al,cl
+mov ah,0
+aaa 		;Ajuste ASCII
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 10B		;salto 2
+mov [bx],al
+mov cl,4	;imprimir resultado
+mov si,210
+mov ah,02
+mov dl,[si]	;Salto 1
+or dl,30
+int 21
+inc si
+loop 124		;salto 1
+int 20
+	
+g
+
+--resta sbb
+debug
+eds:200 "999"
+eds:205 "999"
+eds:210 "0000"
+a
+mov cl,3
+mov si,202	;Primer operando
+mov di,207	;segudo operando
+mov bx,213	;Reservo de memoria
+mov al,[si]	;salto 2
+mov dl,[di]
+sbb al,cl
+mov ah,0
+aas 		;Ajuste ASCII
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 10B		;salto 2
+mov [bx],al
+mov cl,4	;imprimir resultado
+mov si,210
+mov ah,02
+mov dl,[si]	;Salto 1
+or dl,30
+int 21
+inc si
+loop 124		;salto 1
+int 20
+	
+g
+--Multiplicacion
+debug
+eds:200 "130"
+eds:210 "78"
+eds:220 "00000"
+eds:230 "00000"
+eds:240 "00000"
+eds:250 "0"	
+a
+mov cl,3
+mov si,202
+mov di,211
+mov bx,224
+mov al,[si]	;salto 1
+mov dl,[di]
+and al,0f
+and dl,0f
+mul dl
+aam
+add al,[250]
+aaa
+mov [bx],al
+mov [250],ah
+dec si
+dec bx
+loop 10B 	;Salto 1
+mov [bx],ah
+mov dh,0
+mov ax,0
+mov [250],dh
+dec di		;segunda multiplicacion
+mov cl,3
+mov si,202
+mov bx,233
+mov al,[si]	;salto 2
+mov dl,[di]
+and al,0f
+and dl,0f
+mul dl
+aam
+add al,[250]
+aaa
+mov [bx],al
+mov [250],ah
+dec si
+dec bx
+loop 13b 	;Salto 2
+mov [bx],ah
+clc		;Limpiar carry
+mov cl,5	;SUMA
+mov si,224
+mov di,234
+mov bx,244
+mov al,[si]	;salto3
+mov dl,[di]
+mov ah,0
+adc al,dl
+aaa
+mov [bx],al
+dec si
+dec di
+dec bx
+loop 165 	;salto 3
+mov [bx],ah
+mov cl,5	;IMPRIMIR PRRO
+mov si,240	
+mov ah,02
+mov dl,[si]	;SALTO 4w
+or dl,30
+int 21
+inc si
+loop 17e	;SALTO 4
+int 20
+
+
+//Insertar datos de teclado
+debug
+eds:200 "Dame tu nombre: "
+a
+mov cl,10
+mov si,200
+mov ah,02
+mov dl,[si] 	;salto 1
+int 21
+inc si
+loop 107	;salto 1
+mov cl,5 
+mov ah,0	;salto 2
+int 16
+mov ah,02
+mov dl,al
+int 21
+loop 110	;SALTO 2
+int 20
+
+
+
+
