@@ -1,0 +1,86 @@
+;----------------------------------------------------------
+; 160519
+; s de cadena,b un byte,w palabra
+; stos va y almacena algo lo que estè en el registro al
+;----------------------------------------------------------
+
+debug
+eds:200 "12345"
+a
+cld
+mov ax,2a		;asterisco
+mov cl,3
+lea di,[200]
+rep stosb		;mover un byte
+
+;----------------------------------------------------------
+
+debug
+eds:200 "12345"
+a
+cld
+mov ax,2a2a		;asterisco
+mov cl,5
+lea di,[200]
+rep stosw		;mover dos bytes
+
+;----------------------------------------------------------
+
+debug
+eds:200 "12345"
+eds:210 "00000"
+a
+cld
+mov cl,5
+lea si,[200]
+lea di,[210]
+lodsw			;cargar una cadena del tamanio de un byte
+mov [di],ax
+inc di
+loop 10b		;ve a lodsw
+
+;----------------------------------------------------------
+; DIVISIÒN
+; exclusiva del registro ax
+; ah cociente
+; al residuo
+; primer aplicar ajuste y despues dividir
+
+debug
+a
+mov al,51
+mov cl,9
+div cl
+mov al,54
+div cl
+mov ax,0804
+mov cl,39
+and cl,0f
+aad
+div cl
+
+;----------------------------------------------------------
+
+debug
+eds:200 "3698"
+eds:210 "4"
+eds:220 "0000"
+a
+mov cx,4
+sub ah,ah
+lea si,[200]
+lodsb			;salto1
+and al,0f
+aad
+lea si,[210]
+lea di,[220]
+mov bl,[si]
+and bl,0f
+div bl
+stosb
+inc di
+loop 109		;ve a salto1
+
+
+
+

@@ -1,0 +1,74 @@
+.model small
+.stack 64
+.data
+;----------------------------------------------------------
+
+;---------------- LETREROS, VARIABLES ---------------------
+
+dividendo db "36"
+divisor db "4"
+resultado db 4 dup ('0'), "$"
+
+;----------------------------------------------------------
+
+;iniciar con code
+.code
+inicio proc far
+	
+	mov ax,@data
+	mov ds,ax
+	mov es,ax
+	
+	mov cl,4
+	lea si,dividendo
+	lea bx,divisor
+	lea di,resultado
+	mov dl,[bx]
+	and dl,0fh
+saltoDDD:lodsb		;Salto 1
+	and al,0fh
+	aad
+	div dl
+	stosb
+	loop saltoDDD
+	
+	mov ah,02
+	lea di, resultado
+	mov cl,4
+sd2:	mov dl,[di]
+	or dl, 30h
+	int 21h
+	inc di
+	loop sd2
+
+
+
+
+salto2:	mov ah,0
+	int 16h
+	cmp al,13	;comparar si es enter para cerrar
+	je fin
+	jne salto2
+
+fin:	mov ax,4c00h 	;fin del programa
+	int 21h
+inicio endp
+
+;----------------- METODOS-----------------------------------
+
+imprimir proc near
+	mov ah,09
+	int 21h
+	ret
+imprimir endp
+
+
+cursor proc near
+	mov ah,02
+	mov bh,0
+	int 10h
+	ret
+cursor endp
+
+;------------------ FIN DE PROGRAMA ---------------------------
+end inicio

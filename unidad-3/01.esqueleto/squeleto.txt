@@ -1,0 +1,48 @@
+;--------------------------------------------------------------------
+; DESCRIPCIÒN
+;--------------------------------------------------------------------
+;
+;
+;--------------------------- MACROS ---------------------------------
+;
+;------------------------ FIN DE MACROS -----------------------------
+
+
+.Model small
+.Stack 64
+.Data
+
+;----------------------- LETREROS Y VARIABLES -----------------------
+
+nombre db "Jessica",0dh,0ah,"Ramirez"
+
+;-------------------- FIN DE LETREROS Y VARIABLES -------------------
+;----------------------- INICIALIZAR CÒDIGO -------------------------
+.Code
+
+inicio proc far
+		mov ax,@data	;alineacion segmento datos
+		mov es,ax
+		mov ds,ax
+
+		mov cl,10
+		lea si,nombre
+		mov ah,02
+salto1: 	mov dl,[si]
+		int 21h			;h
+		inc si
+		loop salto1
+
+		mov ax,4c00h		;fin de programa
+		int 21h
+inicio endp
+;------------------------ FIN DE CÒDIGO -----------------------------
+;------------------------- PROCEDIMIENTOS ---------------------------
+
+;----------------------- FIN DE PROCEDIMIENTOS ----------------------
+end inicio
+;--------------------------- FIN DE PROGRAMA ------------------------
+
+; masm program.asm;
+; link program;
+; program

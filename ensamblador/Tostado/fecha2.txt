@@ -1,0 +1,103 @@
+.model small
+.stack 64
+.data
+;----------------------------------------------------------
+
+;---------------- LETREROS, VARIABLES ---------------------
+
+domingo db "Domingo",20h,20h,"$"
+lunes db "Lunes",20h,20h,"$"
+martes db "Martes",20h,20h,"$"
+miercoles db "Miercoles",20h,20h,"$"
+jueves db "Jueves",20h,20h,"$"
+viernes db "Viernes",20h,20h,"$"
+sabado db "Sabado",20h,20h,"$"
+
+
+
+;----------------------------------------------------------
+
+;iniciar con code
+.code
+inicio proc far
+	
+	mov ax,@data
+	mov ds,ax
+	mov es,ax
+	
+	call fecha
+	cmp al,0
+	je sunday
+	cmp al,1
+	je monday
+	cmp al,2
+	je tuesday
+	cmp al,3
+	je wednesday
+	cmp al,4
+	je thursday
+	cmp al,5
+	je friday
+	cmp al,6
+	je saturday
+
+sunday: lea dx,domingo
+	call imprimir
+	jmp fin
+
+monday: lea dx,lunes
+	call imprimir
+	jmp fin
+
+tuesday: lea dx,martes
+	call imprimir
+	jmp fin
+
+wednesday: lea dx, miercoles
+	call imprimir
+	jmp fin
+
+thursday: lea dx, jueves
+	call imprimir
+	jmp fin
+
+friday: lea dx, viernes
+	call imprimir
+	jmp fin
+
+saturday: lea dx, sabado
+	call imprimir
+	jmp fin
+
+fin:	mov ax,4c00h 	;fin del programa
+	int 21h
+inicio endp
+
+;----------------- METODOS-----------------------------------
+
+fecha proc near
+	mov ah,2ah
+	int 21h
+	ret
+fecha endp
+
+;_____________________________________
+imprimir proc near
+	mov ah,09
+	int 21h
+	ret
+imprimir endp
+
+;_____________________________________
+
+
+;________________________________________
+cursor proc near
+	mov ah,02
+	mov bh,0
+	int 10h
+	ret
+cursor endp
+
+;------------------ FIN DE PROGRAMA ---------------------------
+end inicio

@@ -1,0 +1,214 @@
+debug
+a
+mov ah,0
+mov al,12	;Adaptador VGA
+int 10
+mov ah,0c
+mov al,0e
+mov bh,0
+mov cx,20	;fila inicial
+mov dx,20	;columna inicial
+int 10		;salto harriba
+inc cx	
+cmp cx,1F4
+jne 112		;salto
+inc dx		;salto2 vderecha
+int 10	
+cmp dx,190
+jne 11b		;salto2
+dec cx		;salto3 habajo
+int 10
+cmp cx,20
+jne 124		; salto3 vizq
+dec dx		;salto4
+int 10
+cmp dx,20
+jne 12c		; salto4
+mov bh,3
+mov cx,190
+mov dx,15E
+int 10		;salto5 corner
+inc cx	
+cmp cx,1F4
+jne 13c		;salto5
+mov cx,190
+mov dx,15E
+int 10		;salto6 corner
+inc dx	
+cmp dx,190
+jne 14b		;salto6
+mov al,6	;color cafe
+mov cx,1f	; INICIO MONTAIN
+mov dx,99
+inc cx		;salto7 diagonal abajoDOWN
+dec dx
+int 10
+cmp cx,48
+jne 15C		;salto7
+inc dx		;salto8 diagonal abajoUP
+inc cx
+int 10
+cmp dx,101
+jne 165	;salto8
+inc cx		;salto9 diagonal abajoDOWN
+dec dx
+int 10
+cmp cx,15f
+jne 16f		;salto9
+inc dx		;salto10 diagonal abajoUP
+inc cx
+int 10
+cmp dx,102
+jne 179		;salto10
+inc cx		;salto11 diagonal abajoDOWN
+dec dx
+int 10
+cmp cx,1f4
+jne 183		;salto11 Fin MONTAIN
+mov al,09	;color
+mov cx,1f	;INICIO DE MAR
+mov dx,14e
+inc cx		;salto12
+dec dx
+int 10
+cmp cx,3a
+jne 195		;salto12
+inc dx		;salto13
+inc cx
+int 10
+cmp cx,52
+jne 19e		;salto13
+inc cx		;salto14
+dec dx
+int 10
+cmp cx,6a
+jne 1a7		;salto14
+inc dx		;salto15
+inc cx
+int 10
+cmp cx,82
+jne 1b0		;salto15
+inc cx		;salto16
+dec dx
+int 10
+cmp cx,9a
+jne 1ba		;salto16
+inc dx		;salto17
+inc cx
+int 10
+cmp cx,b4
+jne 1c4		;salto17
+inc cx		;salto18
+dec dx
+int 10
+cmp cx,cd
+jne 1ce		;salto18
+inc dx		;salto19
+inc cx
+int 10
+cmp cx,e6
+jne 1d8		;salto19
+inc cx		;salto20
+dec dx
+int 10
+cmp cx,ff
+jne 1e2		;salto20
+inc dx		;salto21
+inc cx
+int 10
+cmp cx,119
+jne 1ec		;salto21
+inc cx		;salto22
+dec dx
+int 10
+cmp cx,133
+jne 1f6		;salto22
+inc dx		;salto23
+inc cx
+int 10
+cmp cx,14d
+jne 200		;salto23
+inc cx		;salto24
+dec dx
+int 10
+cmp cx,168
+jne 20a		;salto24
+inc dx		;salto25
+inc cx
+int 10
+cmp cx,183
+jne 214		;salto25
+inc cx		;salto26
+dec dx
+int 10
+cmp cx,19c
+jne 21e		;salto26
+inc dx		;salto27
+inc cx
+int 10
+cmp cx,1b5
+jne 228		;salto27
+inc cx		;salto28
+dec dx
+int 10
+cmp cx,1cd
+jne 232		;salto28
+inc dx		;salto29
+inc cx
+int 10
+cmp cx,1e5
+jne 23c		;salto29
+inc cx		;salto30
+dec dx
+int 10
+cmp cx,1f4
+jne 246		;salto30 FIN MAR
+mov al,7	;color blanco
+mov cx,d9	;INICIO DE BIRD
+mov dx,70
+inc cx		;salto1
+dec dx
+int 10
+cmp cx,e7
+jne 258		;salto1
+inc dx		;salto2
+inc cx
+int 10
+cmp cx,f4
+jne 262		;salto2
+inc cx		;salto3
+dec dx
+int 10
+cmp cx,104
+jne 26c		;salto3
+inc dx		;salto4
+inc cx
+int 10
+cmp cx,10a
+jne 276		;salto4 FIN BIRD
+mov al,0e
+mov cx,190	;INICIO DE SOL
+mov dx,20
+inc dx		;salto1
+int 10
+cmp dx,49
+jne 288		;salto1
+inc dx		;salto2
+inc cx
+int 10
+cmp cx,1c1
+jne 290		;salto2
+inc cx		;salto3
+int 10
+cmp cx,1f4
+jne 29a		;salto3
+mov ah,0	;EXIT
+int 16
+mov ah,0
+mov al,3
+int 10
+int 20		; FIN DE EXIT
+-----------------------------------------------
+mov al,6	;color cafe
+mov cx,d9	;PUNTO X
+mov dx,102	;PUNTO Y

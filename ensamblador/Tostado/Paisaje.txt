@@ -1,0 +1,500 @@
+debug
+a
+mov ah,0 	;Para comenzar a cambiar el modo grafico
+mov al,12	;Para cambiar a modo grafico
+int 10
+mov ah,0c	;Para poner un punto COMIENZAN MONTAÑAS
+mov al,06	;colocamos el color (cafe)
+mov bh,0	;Pagina 0
+mov cx,20	;coordenada horizontal
+mov dx,100	;coordenada vertical
+int 10		;Salto1 
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto2
+dec di		;Salto3
+cmp di,0
+jne 11a		;Ir a Salto3
+dec si
+cmp si,0
+jne 117		;Ir a Salto2 termina pausa para impresion   
+inc cx
+dec dx
+cmp dx,70
+jne 112		;Ir a Salto1
+int 10		;Salto4
+mov si,0fff	;Pausa para impresión
+mov di,0fff	;Salto5
+dec di		;Salto6
+cmp di,0
+jne 135		;Ir a Salto6
+dec si
+cmp si,0
+jne 132		;Ir a Salto5 
+inc cx
+inc dx
+cmp dx,100
+jne 12d		;Ir a Salto4
+int 10		;Salto5
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto6
+dec di		;Salto7
+cmp di,0
+jne 153		;Ir a Salto7
+dec si
+cmp si,0
+jne 150		;Ir a Salto6 termina pausa para impresion
+cmp dx,70
+jne 149		;Ir a Salto5
+int 10		;Salto8
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto9
+dec di		;Salto10
+cmp di,0
+jne 16e		;Ir a Salto10
+dec si
+cmp si,0
+jne 16b		;Ir a Salto9 termina pausa para impresion
+cmp dx,100
+jne 164		;Ir a Salto8 TERMINAN MONTAÑAS
+mov al,0e	;colocamos el color (amarillo) COMIENZA SOL
+mov cx,220	;coordenada horizontal
+mov dx,0	;coordenada vertical
+int 10		;Salto11
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto12
+dec di		;Salto13
+cmp di,0
+jne 191		;Ir a Salto13
+dec si
+cmp si,0
+jne 18e		;Ir a Salto12 termina pausa para impresion
+cmp dx,30
+jne 188		;Ir a Salto11
+int 10 		;Salto14
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto15
+dec di		;Salto16
+cmp di,0
+jne 1ac		;Ir a Salto16
+dec si
+cmp si,0
+jne 1a9		;Ir a Salto15 termina pausa para impresion
+cmp cx,250
+jne 1a2		;Ir a Salto14
+int 10		;Salto17
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto18
+dec di		;Salto19
+cmp di,0
+jne 1c7		;Ir a Salto19
+dec si
+cmp si,0
+jne 1c4		;Ir a Salto18 termina pausa para impresion
+cmp cx,280
+jne 1be		;Ir a Salto17
+mov cx,200	;coordenada horizontal	linea uno del sol
+mov dx,20	;coordenada vertical
+int 10		;Salto20
+dec cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto21
+dec di		;Salto22
+cmp di,0
+jne 1e8		;Ir a Salto22
+dec si
+cmp si,0
+jne 1e5		;Ir a Salto21 termina pausa para impresion
+cmp cx,195
+jne 1df		;Ir a Salto20
+mov cx,220	;coordenada horizontal	linea dos del sol
+mov dx,60	;coordenada vertical
+int 10		;Salto23
+inc dx
+dec cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto24
+dec di		;Salto25
+cmp di,0
+jne 20a		;Ir a Salto25
+dec si
+cmp si,0
+jne 207		;Ir a Salto24 termina pausa para impresion
+cmp dx,75
+jne 200		;Ir a Salto23
+mov cx,260	;coordenada horizontal	linea tres del sol
+mov dx,80	;coordenada vertical
+int 10		;Salto26
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto27
+dec di		;Salto28
+cmp di,0
+jne 22a		;Ir a Salto28
+dec si
+cmp si,0
+jne 227		;Ir a Salto27 termina pausa para impresion
+cmp dx,95
+jne 221		;Ir a Salto26 TERMINA SOL
+mov al,07	;colocamos el color (blanco) COMIENZA GAVIOTA
+mov cx,100	;coordenada horizontal
+mov dx,40	;coordenada vertical
+int 10		;Salto29
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto30
+dec di		;Salto31
+cmp di,0
+jne 24d		;Ir a Salto31
+dec si
+cmp si,0
+jne 24a		;Ir a Salto30 termina pausa para impresion
+cmp cx,120
+jne 244		;Ir a Salto29
+int 10		;Salto32
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto33
+dec di		;Salto34
+cmp di,0
+jne 269		;Ir a Salto34
+dec si
+cmp si,0
+jne 266		;Ir a Salto33 termina pausa para impresion
+cmp dx,60
+jne 25f		;Ir a Salto32
+int 10		;Salto35
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto36
+dec di		;Salto37
+cmp di,0
+jne 284		;Ir a Salto37
+dec si
+cmp si,0
+jne 281		;Ir a Salto36 termina pausa para impresion
+cmp dx,40
+jne 27a		;Ir a Salto35
+int 10		;Salto38
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto39
+dec di		;Salto40
+cmp di,0
+jne 29e		;Ir a Salto40
+dec si
+cmp si,0
+jne 29b		;Ir a Salto39 termina pausa para impresion
+cmp cx,180
+jne 295		;Ir a Salto38 TERMINA GAVIOTA
+mov al,09	;colocamos el color (azul) COMIENZA MAR
+mov cx,40	;coordenada horizontal
+mov dx,130	;coordenada vertical
+int 10		;Salto41
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto42
+dec di		;Salto43
+cmp di,0
+jne 2c1		;Ir a Salto43
+dec si
+cmp si,0
+jne 2be		;Ir a Salto42 termina pausa para impresion
+cmp cx,60
+jne 2b8		;Ir a Salto41
+int 10		;Salto44
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto45
+dec di		;Salto46
+cmp di,0
+jne 2dc		;Ir a Salto46
+dec si
+cmp si,0
+jne 2d9		;Ir a Salto45 termina pausa para impresion
+cmp cx,70
+jne 2d2		;Ir a Salto44
+int 10		;Salto47
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto48
+dec di		;Salto49
+cmp di,0
+jne 2f7		;Ir a Salto49
+dec si
+cmp si,0
+jne 2f4		;Ir a Salto48 termina pausa para impresion
+cmp cx,80
+jne 2ed		;Ir a Salto47
+int 10		;Salto50
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto51
+dec di		;Salto52
+cmp di,0
+jne 312		;Ir a Salto52
+dec si
+cmp si,0
+jne 30f		;Ir a Salto51 termina pausa para impresion
+cmp cx,90
+jne 309		;Ir a Salto50
+mov cx,90	;coordenada horizontal
+mov dx,130	;coordenada vertical
+int 10		;Salto53
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto54
+dec di		;Salto55
+cmp di,0
+jne 333		;Ir a Salto55
+dec si
+cmp si,0
+jne 330		;Ir a Salto54 termina pausa para impresion
+cmp cx,98
+jne 32a		;Ir a Salto53
+mov cx,130	;coordenada horizontal
+mov dx,130	;coordenada vertical
+int 10		;Salto56
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto57
+dec di		;Salto58
+cmp di,0
+jne 354		;Ir a Salto58
+dec si
+cmp si,0
+jne 351		;Ir a Salto57 termina pausa para impresion
+cmp cx,150
+jne 34b		;Ir a Salto56
+int 10		;Salto59
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto60
+dec di		;Salto61
+cmp di,0
+jne 370		;Ir a Salto61
+dec si
+cmp si,0
+jne 36d		;Ir a Salto60 termina pausa para impresion
+cmp dx,120
+jne 366		;Ir a Salto59
+int 10		;Salto62
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto63
+dec di		;Salto64
+cmp di,0
+jne 38c		;Ir a Salto64
+dec si
+cmp si,0
+jne 389		;Ir a Salto63 termina pausa para impresion
+cmp dx,130
+jne 382		;Ir a Salto62
+int 10		;Salto65
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto66
+dec di		;Salto67
+cmp di,0
+jne 3a7		;Ir a Salto67
+dec si
+cmp si,0
+jne 3a4		;Ir a Salto66 termina pausa para impresion
+cmp cx,180
+jne 39e		;Ir a Salto65
+mov cx,80	;coordenada horizontal
+mov dx,160	;coordenada vertical
+int 10		;Salto68
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto69
+dec di		;Salto70
+cmp di,0
+jne 3c8		;Ir a Salto70
+dec si
+cmp si,0
+jne 3c5		;Ir a Salto69 termina pausa para impresion
+cmp cx,100
+jne 3bf		;Ir a Salto68
+int 10		;Salto71
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto72
+dec di		;Salto73
+cmp di,0
+jne 3e4		;Ir a Salto73
+dec si
+cmp si,0
+jne 3e1		;Ir a Salto72 termina pausa para impresion
+cmp dx,150
+jne 3da		;Ir a Salto71
+int 10		;Salto74
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto75
+dec di		;Salto76
+cmp di,0
+jne 400		;Ir a Salto76
+dec si
+cmp si,0
+jne 3fd		;Ir a Salto75 termina pausa para impresion
+cmp dx,160
+jne 3f6		;Ir a Salto74
+int 10		;Salto77
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto78
+dec di		;Salto79
+cmp di,0
+jne 41b		;Ir a Salto79
+dec si
+cmp si,0
+jne 418		;Ir a Salto78 termina pausa para impresion
+cmp cx,140
+jne 412		;Ir a Salto77
+mov cx,160	;coordenada horizontal
+mov dx,160	;coordenada vertical
+int 10		;Salto80
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto81
+dec di		;Salto82
+cmp di,0
+jne 43c		;Ir a Salto82
+dec si
+cmp si,0
+jne 439		;Ir a Salto81 termina pausa para impresion
+cmp cx,170
+jne 433		;Ir a Salto80
+int 10		;Salto83
+inc cx
+dec dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto84
+dec di		;Salto85
+cmp di,0
+jne 458		;Ir a Salto85
+dec si
+cmp si,0
+jne 455		;Ir a Salto84 termina pausa para impresion
+cmp dx,150
+jne 44e		;Ir a Salto83
+int 10		;Salto86
+inc cx
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto87
+dec di		;Salto88
+cmp di,0
+jne 474		;Ir a Salto88
+dec si
+cmp si,0
+jne 471		;Ir a Salto87 termina pausa para impresion
+cmp dx,160
+jne 46a		;Ir a Salto86
+int 10		;Salto89
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto90
+dec di		;Salto91
+cmp di,0
+jne 48f		;Ir a Salto91
+dec si
+cmp si,0
+jne 48c		;Ir a Salto90 termina pausa para impresion
+cmp cx,200
+jne 486		;Ir a Salto89	TERMINA MAR
+mov al,13	;colocamos el color (verde agua) INICIA CUADRADO
+mov cx,195	;coordenada horizontal
+mov dx,190	;coordenada vertical
+int 10		;Salto92    
+inc cx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto93
+dec di		;Salto94
+cmp di,0
+jne 4b2		;Ir a Salto94
+dec si
+cmp si,0
+jne 4af		;Ir a Salto93 termina pausa para impresion
+cmp cx,260
+jne 4a9		;Ir a Salto92
+mov cx,195	;coordenada horizontal
+mov dx,190	;coordenada vertical
+int 10		;Salto95    
+inc dx
+mov si,0fff	;Pausa para impresión inicia
+mov di,0fff	;Salto96
+dec di		;Salto97
+cmp di,0
+jne 4d3		;Ir a Salto97
+dec si
+cmp si,0
+jne 4d0		;Ir a Salto96 termina pausa para impresion
+cmp dx,200
+jne 4ca		;Ir a Salto95	TERMINA CUADRADO
+mov cl,18	;Imprimir saltos de linea y retorno de carro
+mov ah,02
+mov dl,0d	;Salto98
+int 21
+mov dl,0a
+int 21
+dec cl
+cmp cl,0
+jne 4e9		;ir a Salto98
+mov cl,30	;Imprimir el espacio
+mov dl,20	;20 es espacio en ascii
+int 21		;Salto99
+dec cl
+cmp cl,0
+jne 4fc		;ir a Salto99
+mov cl,10	;Cantidad de caracteres de mi nombre (son 18)
+mov si,600
+mov ah,02
+mov dl,[si]	;Salto100
+int 21
+inc si
+loop 50c	;ir a Salto100
+mov cl,1	;Imprimir saltos de linea y retorno de carro
+mov ah,02
+mov dl,0d	;Salto101
+int 21
+mov dl,0a
+int 21
+dec cl
+cmp cl,0
+jne 517		;ir a Salto101
+mov cl,30	;Imprimir el espacio
+mov dl,20	;20 es espacio en ascii
+int 21		;Salto102
+dec cl
+cmp cl,0
+jne 52a		;ir a Salto102
+mov cl,15	;Cantidad de caracteres de materia
+mov si,620
+mov ah,02
+mov dl,[si]	;Salto103
+int 21
+inc si
+loop 53a	;ir a Salto103
+mov ah,0	;Pausa para comenzar a cambiar a modo texto
+int 16
+mov ah,0	;Para comenzar a cambiar a modo texto
+mov al,3	;Para cambiar a modo texto
+int 10
+int 20		;Fin del programa

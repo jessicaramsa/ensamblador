@@ -1,0 +1,88 @@
+debug
+eds:200 "12345"
+a
+clc
+mov cl,5
+lea si,[200]	
+lea di,[204]
+lodsb		;Salto 1
+mov [di],al
+dec di
+loop 10B	;Salto 1
+
+
+debug 
+eds:200 "12345"
+cld
+mov al,31
+mov cx,5
+lea di,[200]
+rep stosb
+
+------------------------DIVISION-------------------------
+debug
+a
+mov al,51
+mov cl,9
+div cl
+
+a
+mov al,54
+div cl
+
+mov ax,3831
+and ax,0fof
+aad
+div cl
+
+--------------------DIV------------------------
+debug
+eds:200 "3698"
+eds:210 "4"
+eds:220 "0000"
+a
+mov cl,4
+lea si,[200]
+lea bx,[210]
+lea di,[220]
+mov dl,[bx]
+and dl,0f
+lodsb		;Salto 1
+and al,0f
+aad
+div dl
+stosb
+loop 113 		;Salto 1
+mov cl,5
+mov si,220
+mov ah,02
+mov dl,[si]	;Salto 2
+or dl,30
+int 21
+inc si
+loop 124	;Salto 2
+int 20
+
+-------------------DIVISION RESTANDO-------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+;--------- 300419 ---
+
+;--- mover cadenas de datos
+debug
+eds:200 "123"
+eds:210 "000"
+a
+cld		;limpiar badera de direccion
+mov cl,3
+lea si,[200]
+lea di,[210]
+rep movsb	;s es cadena, mover un byte
+
+
+
+;--- comparar cadenas de datos
+debug
+eds:200 "123"
+eds:210 "133"
+a
+cld
+mov cl,3
+lea si,[200]
+lea di,[210]
+repe cmpsb	;compara el byte
+
+
+;si cx llega a 0 es correcto
+;si cx es mayor que 0 es incorrecto

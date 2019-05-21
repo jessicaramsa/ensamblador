@@ -1,0 +1,10 @@
+En cmd
+
+;--- crea nombre.obj
+masm nombre.asm;
+
+;--- crea nombre.exe
+link nombre;
+
+;--ejecutar
+nombre

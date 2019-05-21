@@ -1,0 +1,35 @@
+debug
+eds:200 "7436"
+eds:210 "3"
+eds:220 "00000"
+a
+mov cl,4
+mov dh,00
+mov si,203
+mov di,210
+mov bx,224
+mov al,[si]	;aqui es salto 1
+and al,0f
+mov dl,[di]
+and dl,0f
+mul dl
+aam
+add al,dh	
+aaa 
+mov [bx],al
+mov dh,ah
+dec si
+dec bx
+loop 10d	;salto 1
+mov [bx],ah
+mov cl,5
+mov si,220
+mov ah,02
+mov dl,[si]	;aqui es salto 2
+or dl,30
+int 21
+inc si
+loop 12e	;salto 2
+int 20
+
+

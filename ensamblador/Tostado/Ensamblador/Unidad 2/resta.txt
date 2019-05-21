@@ -1,0 +1,38 @@
+debug
+eds:200 "423"
+eds:205 "967"
+eds:210 "0000"
+a
+mov dl,3
+mov si,202
+mov di,207
+mov bx,213
+mov al,[si]	;salto 2
+mov cl,[di]
+cmp ah,ff
+jne 119 	;salto resta
+and ah,0
+mov ah,1
+sub al,ah	;salto resta
+sub al,cl
+mov ah,0
+aas		;ajuste ascci
+mov [bx],al
+dec si
+dec di
+dec bx
+dec dl
+cmp dl,0
+jne 10B	;salto 2
+mov [bx],ah
+mov cl,4	;imprimir resultado
+mov si,210
+mov ah,02
+mov dl,[si]	;salto 1
+or dl,30
+int 21
+inc si
+dec cl
+cmp cl,0
+jne 135		;Salto 1	
+int 20

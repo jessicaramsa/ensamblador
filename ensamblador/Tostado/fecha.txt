@@ -1,0 +1,7 @@
+//dias de la semana
+//cx muestra año
+//dh muestra mes y DL muestra dia
+debug
+a
+mov ah,2a
+int 21

@@ -1,0 +1,62 @@
+;----------------------------------------------------
+;020519
+;----------------------------------------------------
+
+debug
+a
+mov ah,0
+mov al,1
+int 10
+mov al,3		;cambiar a modo texto
+int 10
+
+
+;---- modo gràfico
+debug
+a
+mov ah,0
+mov al,12	;cambiar a modo 12 o 13, 10 - modo de video
+int 10
+mov ah,0c
+mov al,0e	;color a manejar
+mov bh,0	;pàgina 0
+mov cx,20	;parte horizontal, LINEA SUPERIOR
+mov dx,20	;vertical
+int 10		;s1
+inc cx
+cmp cx,70	;tamaño de linea
+jne 112		;ve a s1
+mov cx,70	;parte horizontal, LINEA DERECHA
+mov dx,20	;vertical
+int 10		;s2
+inc dx
+cmp dx,70	;tamaño de linea
+jne 120		;ve a s2
+
+mov cx,90	;parte horizontal, LINEA INFERIOR
+mov dx,20	;vertical
+int 10		;s3
+dec cx
+cmp cx,0	;tamaño de linea
+jne 12e		;ve a s3
+
+mov cx,20	;parte horizontal, LINEA IZQUIERDA
+mov dx,70	;vertical
+int 10		;s4
+inc dx
+cmp dx,70	;tamaño de linea
+jne 120		;ve a s4
+
+
+mov ah,0	;espera
+int 16
+mov ah,0	;modo texto
+mov al,3
+int 10
+int 20
+
+
+
+
+
+

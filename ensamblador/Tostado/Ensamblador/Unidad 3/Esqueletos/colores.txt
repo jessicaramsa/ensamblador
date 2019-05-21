@@ -1,0 +1,17 @@
+Negro 	    	0000
+Azul	    	0001
+Verde 	    	0010
+Cian	    	0011
+Rojo	    	0100
+Magenta	    	0101
+cafe 	    	0110
+blanco 	    	0111
+gris	    	1000
+
+azul claro  	1001
+Verde claro     1010
+cian claro      1011
+rojo claro	1100
+Magenta claro	1101
+Amarillo    	1110
+BlancoBrillante 1111

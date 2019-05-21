@@ -1,0 +1,23 @@
+.model small
+.stack 64
+.data
+;----------------------------------------------------------
+
+;---------------- LETREROS, VARIABLES ---------------------
+
+
+
+;----------------------------------------------------------
+
+;iniciar con code
+.code
+inicio proc far
+	
+	mov ax,@data
+	mov ds,ax
+	mov es,ax
+	
+	
+imprimir endp
+
+end inicio

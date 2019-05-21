@@ -1,0 +1,39 @@
+
+
+
+
+
+
+
+
+
+
+
+			       IRVA	             IRVA
+			negro  0000
+			azul   0001   azul claro     1001
+			verde  0010   verdeclaro     1010
+		   verde agua  0011   cian claro     1011
+			rojo   0100   naranja        1100
+			morado 0101   lila           1101
+			cafe   0110   amarillo       1110
+			blanco 0111   blanco brillante   1111
+			gris   1000
+			
+			
+			
+			
+			
+		    
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,155 @@
+/*
+Invertir vocales a numeros
+
+a=5(M41,m61)	e=4(M45,65)
+i=3(M49,m69)	o=2(M4F,m6F)
+u=1(M55,m75)
+
+1(31)	2(32)	3(33)
+4(34)	5(35)
+
+Ejemplo
+
+Cristofer --> Cr3st2f4r
+
+despues sumar los valores
+Ejemplo
+
+Cristofer --> Cr3st2f4r = 9
+
+"Nombre: " AURELIO   //8 caracteres
+"Nombre 2: "51r4l32 //10 caracteres
+"Suma de No: " 15  //12 caracteres
+*/
+
+debug
+eds:200 "a=5"0d,0a"e=4"0d,0a"i=3"0d,0a"o=2"0d,0a"u=1"
+eds:300 "Nombre: "
+eds:310 "Nombre 2: "
+eds:320 "Suma de No: "
+eds:340 "aurelio"
+eds:350 "00"
+a
+mov cl, 17	;IMPRIMIR VALORES NUMERICOS
+mov si,200
+mov ah, 02
+mov dl,[si]	;salto 1
+int 21
+inc si
+loop 107	;salto 1
+mov dl,0a
+int 21
+mov dl,0d
+int 21
+mov cl,8	;PRIMER MENSAJE
+mov si,300	;traemos mensaje 1
+mov ah,02
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 11d	;SALTO 1
+mov cl,7
+mov si,340	;traemos el nombre
+mov dl,[si]	;AQUI VA SALTO 2
+int 21
+inc si
+loop 129	;SALTO 2
+mov dl,0a
+int 21
+mov dl,0d
+int 21
+mov cl,a	;SEGUNDO MENSAJE
+mov si,310	;traemos el segundo mensaje
+mov dl,[si]	;AQUI VA SALTO 3
+int 21
+inc si
+loop 13D	;SALTO 3
+mov cl,7	;INICIO DE COMPARACION DE NOMBRE
+mov si,340	;traemos el nombre
+mov ah,02
+mov dl,[si]	;AQUI VA SALTO 1C
+cmp dl,61		;compara si es a
+jne 157			;SALTA A COMPARAR SI ES e
+mov dl,35	;si es igual poner 5
+add dh,5
+cmp dl,65		;compara si es e
+jne 161			;SALTA A COMPARAR SI ES i
+mov dl,34	;si es igual poner 4
+add dh,4
+cmp dl,69		;compara si es i
+jne 16B			;SALTA A COMPARAR SI ES o
+mov dl,33	;si es igual poner 3
+add dh,3
+cmp dl,6f		;compara si es o
+jne 175			;SALTA A COMPARAR SI ES u
+mov dl,32	;si es igual poner 2
+add dh,2
+cmp dl,75		;compara si es u
+jne 17F			;SALTA A INT 21
+mov dl,31	;si es igual poner 1
+add dh,1
+int 21		;SALTO A INT 21
+inc si
+dec di
+loop 14B	;SALTO 1C
+mov dl,0a
+int 21
+mov dl,0d
+int 21		;IMRESION DE SUMA
+mov cl,c	;MENSAJE DE SUMA
+mov si,320	;traemos mensaje
+mov ah,02
+mov dl,[si]	;AQUI VA EL SALTO 1
+int 21
+inc si
+loop 194	;SALTO 1
+mov cl,2 	;Imprimir resultado de la suma
+mov ah,02
+mov si,350	;traemos el resultado
+mov dl,[si]	; AQUI VA EL SALTO 2
+or dl,30
+int 21
+inc si
+loop 1A2		;SALTO 2
+int 20
+
+--------------------------------------------------------------------
+
+mov cl,7	;inicio de comparaciones
+mov si,340	;traemos el nombre a comparar
+mov bx,350	;traemos donde guardar el nombre cambiado
+mov dl,[si]	;AQUI VA EL SALTO 1C
+cmp dl,41	;compara si es a
+jne 123		;salta PARA COMPARAR SI ES A
+je 124		;salta si es igual a a para cambiarlo
+cmp dl,61	;compara si es A
+jne 123		;salta para comparar si es e
+je 124		;salta si es igual a A para cambiarlo
+cmp dl,45	;compara si es e
+jne 123		;salta PARA COMPARAR SI ES E
+je 124		;salta si es igual a e para cambiarlo
+cmp dl,65	;compara si es E
+jne 123		;salta para comparar si es i
+je 124		;salta si es igual a E para cambiarlo
+cmp dl,49	;compara si es i
+jne 123		;salta PARA COMPARAR SI ES I
+je 124		;salta si es igual a i para cambiarlo
+cmp dl,69	;compara si es I
+jne 123		;salta para comparar si es o
+je 124		;salta si es igual a I para cambiarlo
+cmp dl,4F	;compara si es o
+jne 123		;salta PARA COMPARAR SI ES O
+je 124		;salta si es igual a o para cambiarlo
+cmp dl,6F	;compara si es O
+jne 123		;salta para comparar si es u
+je 124		;salta si es igual a O para cambiarlo
+cmp dl,55	;compara si es u
+jne 123		;salta PARA COMPARAR SI ES U
+je 124		;salta si es igual a u para cambiarlo
+cmp dl,75	;compara si es U
+jne 123		;salta para imprimir si es CONSONANTE
+je 124		;salta si es igual a U para cambiarlo
+inc si
+inc bx
+loop 120	;SALTO 1C
+int 20

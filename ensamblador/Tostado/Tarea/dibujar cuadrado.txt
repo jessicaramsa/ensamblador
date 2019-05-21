@@ -1,0 +1,38 @@
+debug
+a
+mov ah,0
+mov al,12	;activar modo de video
+int 10
+mov ah,0c	;dibujar una linea
+mov al,0e	;color
+mov bh,0	
+mov cx,20	;horizontal
+mov dx,20	;vertical
+int 10		;aqui es salto 1
+inc cx
+cmp cx,70
+jne 112		;salto 1
+int 10		;aqui es salto 2
+inc dx
+cmp dx,70
+jne 11a		;salto 2
+int 10		;aqui es salto 3
+dec cx
+cmp cx,20
+jne 122		;salto 3
+int 10		;aqui es salto 4
+dec dx
+cmp dx,20
+jne 12a		;salto 4
+mov ah,0
+int 16
+mov ah,0
+mov al,3
+int 10
+int 20
+
+
+int 10		;aqui es salto 4
+inc dx
+cmp dx,20
+jne 12a		;salto 4
