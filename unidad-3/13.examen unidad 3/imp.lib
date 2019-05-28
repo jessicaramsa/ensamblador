@@ -1,0 +1,5 @@
+imprimir macro msjImprimir
+	mov ah,09
+	lea dx,msjImprimir
+	int 21h
+endm
