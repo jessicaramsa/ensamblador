@@ -1,5 +1,0 @@
-imprimir macro dato 
-		mov ah,09
-		lea dx,dato
-		int 21h
-endm

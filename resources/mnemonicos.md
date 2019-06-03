@@ -31,7 +31,7 @@
   + Fin del programa - int 20
   + Procede a ejecutar la interrupción - p
 + Guardar programa
-  + Nombre (ruta, máx 8 caracteres para nombre) - n c:\8caracte.com
+  + Nombre (ruta, máx 8 caracteres para nombre) - `n c:\8caracte.com`
   + Indicar cuántos bits guardará más 1 – rcx
   + Escribe – w
   + Sal del debugger - q
@@ -45,10 +45,9 @@
   + Loop (especificar dirección ip, dec-cmp-jne) – loop 202
   + Ajuste a ASCII de la substracción - aas
 ---
----
 ### MASM y LINK
 
-##### Procedimientos
+#### Procedimientos
 + Alineaciòn de segmento de datos
   + mov ax,@data
   + mov es,ax
@@ -252,7 +251,7 @@
       + endm
     + Incluir macro en el programa (divide divdnd,divisor,cociente)
 
-##### Instrucciones
+#### Instrucciones
 + Limpiar carry - clc
 + Comparar con enter - cmp al,13
 + Imprimir asterisco - mov dl,2ah
@@ -263,7 +262,6 @@
 + Duplicar caracteres (dup pone 1 menos) - espacio db 2*8 dup (20h),"$"
 + Cuàntos caracteres voy a permitir - reales db ?
 + Mover un byte - rep stosb
----
 ---
 ### Colores (Intensidad Rojo Verde Azul IRVA)
 + Negro            0000
@@ -283,6 +281,3 @@
 + Amarillo         1110
 + Blanco brillante 1111
 ---
----
-
-
